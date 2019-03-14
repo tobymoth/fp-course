@@ -119,14 +119,18 @@ getFiles = sequence . (map getFile)
 run ::
   FilePath
   -> IO ()
-run =
-  error "todo: Course.FileIO#run"
+run fileName = do
+  (_, contents) <- getFile fileName
+  fps <- getFiles $ lines contents
+  printFiles fps
+
 
 -- /Tip:/ use @getArgs@ and @run@
 main ::
   IO ()
-main =
-  error "todo: Course.FileIO#main"
+main = do
+  args <- getArgs
+  void . sequence $ map run args
 
 ----
 
